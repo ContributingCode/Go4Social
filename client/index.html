@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>
+    </title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css"/>
+    <!--<link rel="stylesheet" href="stylesheets/jquery.mobile-1.1.0.min.css">-->
+    <link rel="stylesheet" href="stylesheets/my.css"/>
+ 
+
+
+    <style>
+            /* App custom styles */
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
+    <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js">
+    </script>
+    <script type="text/javascript">
+        $(document).bind("pageinit", function(){
+           //url="http://localhost:3000";
+           url="http://givemearide.cloudfoundry.com";
+           // url="http://vcommute.cloudfoundry.com";
+            var i=1;
+
+            function onSuccess(position) {
+                var  details = {"appid":i,"location": position.coords.longitude+","+position.coords.latitude,"name":"prk"};
+                $.post(url+'/insertDetails', {"details":details}, function (data) {
+                });
+                $.post(url+'/updateLocation', {"appid":"1", "location": position.coords.latitude+","+position.coords.longitude }, function (data) {
+                });
+                var element = document.getElementById('geolocation');
+                element.innerHTML = 'Latitude::: '  + position.coords.latitude      + '<br />' +
+                        'Longitude::: ' + position.coords.longitude     + '<br />' +
+                        '<hr />'      + element.innerHTML;
+                i++;
+            }
+
+            function onError(error) {
+                alert('code: '    + error.code    + '\n' +
+                        'message: ' + error.message + '\n');
+            }
+            var watchID = navigator.geolocation.watchPosition(onSuccess, onError, {enableHighAccuracy: true,maximumAge:3000,timeout: 30000 });
+            var watchID1 = navigator.geolocation.getCurrentPosition(onSuccess, onError,{enableHighAccuracy: true,maximumAge:3000,timeout: 30000 });
+
+        });
+
+    </script>
+
+</head>
+<body>
+
+<div data-role="page" id="page-login">
+    <!--<script src="http://vcommute.cloudfoundry.com/socket.io/socket.io.js"></script>-->
+    <script type="text/javascript"  src="javascripts/login.js"></script>
+    <div style="position:fixed; top: 0; width:100%">
+    <div data-role="header">
+        <h1>Lift</h1>
+    </div>
+
+    <div data-role="content" style="padding: 15px; text-align:center"> 
+        <h1>Welcome To Lift!</h1>
+        <p>This is an application for car pooling!</p>
+        <p><a data-role="button" id="auth-loginlink">Login with Facebook &raquo;</a></p>
+    </div>
+    </div>
+    
+    <!--<p id="geolocation">Watching geolocation...</p>-->
+    <!--
+    <div data-role="content" style="padding: 15px">
+        <fieldset data-role="controlgroup">
+            <p id="geolocation">Watching geolocation...</p>
+        </fieldset>
+    </div>
+    -->
+
+</div>   <!-- page login -->
+
+<div data-role="page" id="page-home">
+    <!--<script src="http://vcommute.cloudfoundry.com/socket.io/socket.io.js"></script>-->
+    <script type="text/javascript"  src="javascripts/home.js"></script>
+    <div data-role="header" data-position="fixed" data-theme="b">
+        <h1>Lift</h1>
+        <a href="index.html#page-profile" data-icon="gear" data-rel="dialog" data-transition="pop" class="ui-btn-left">profile</a>
+        <a href="index.html#page-message" data-icon="gear" data-rel="dialog" data-transition="pop" class="ui-btn-right">broadcast</a>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h1> Waiting for a car?
+        <select name="flip-5" id="flip-5" data-role="slider" data-theme="c" data-track-theme="a">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+        </select>
+        </h1>
+    </div>
+
+    <ul data-role="listview">
+        <li><a href="index.html#page-profile" data-rel="dialog" data-transition="pop">
+            <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/372183_100002081796756_1036753949_q.jpg" />
+            <h3>Jinchao Ye</h3>
+            <p>I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;</p>
+            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+            </a>
+        </li>
+        <li><a href="index.html#page-profile" data-rel="dialog" data-transition="pop">
+            <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/372183_100002081796756_1036753949_q.jpg" />
+            <h3>Jinchao Ye</h3>
+            <p>I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;</p>
+            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+            </a>
+        </li>
+        <li><a href="index.html#page-profile" data-rel="dialog" data-transition="pop">
+            <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/372183_100002081796756_1036753949_q.jpg" />
+            <h3>Jinchao Ye</h3>
+            <p>I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;</p>
+            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+            </a>
+        </li>
+        <li><a href="index.html#page-profile" data-rel="dialog" data-transition="pop">
+            <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/372183_100002081796756_1036753949_q.jpg" />
+            <h3>Jinchao Ye</h3>
+            <p>I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;</p>
+            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+            </a>
+        </li>
+        <li><a href="index.html#page-profile" data-rel="dialog" data-transition="pop">
+            <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/372183_100002081796756_1036753949_q.jpg" />
+            <h3>Jinchao Ye</h3>
+            <p>I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;</p>
+            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+            </a>
+        </li>
+        <li><a href="index.html#page-profile" data-rel="dialog" data-transition="pop">
+            <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/372183_100002081796756_1036753949_q.jpg" />
+            <h3>Jinchao Ye</h3>
+            <p>I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;</p>
+            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+            </a>
+        </li>
+        <li><a href="index.html#page-profile" data-rel="dialog" data-transition="pop">
+            <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/372183_100002081796756_1036753949_q.jpg" />
+            <h3>Jinchao Ye</h3>
+            <p>I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;</p>
+            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+            </a>
+        </li>
+        <li><a href="index.html#page-profile" data-rel="dialog" data-transition="pop">
+            <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/372183_100002081796756_1036753949_q.jpg" />
+            <h3>Jinchao Ye</h3>
+            <p>I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;</p>
+            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+            </a>
+        </li>
+        <li><a href="index.html#page-profile" data-rel="dialog" data-transition="pop">
+            <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/372183_100002081796756_1036753949_q.jpg" />
+            <h3>Jinchao Ye</h3>
+            <p>I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;</p>
+            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+            </a>
+        </li>
+        <li><a href="index.html#page-profile" data-rel="dialog" data-transition="pop">
+            <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/372183_100002081796756_1036753949_q.jpg" />
+            <h3>Jinchao Ye</h3>
+            <p>I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;</p>
+            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+            </a>
+        </li>
+        <li><a href="index.html#page-profile" data-rel="dialog" data-transition="pop">
+            <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/372183_100002081796756_1036753949_q.jpg" />
+            <h3>Jinchao Ye</h3>
+            <p>I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;</p>
+            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+            </a>
+        </li>
+        <li><a href="index.html#page-profile" data-rel="dialog" data-transition="pop">
+            <img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/372183_100002081796756_1036753949_q.jpg" />
+            <h3>Jinchao Ye</h3>
+            <p>I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;I am in SF;</p>
+            <p class="ui-li-aside"><strong>6:24</strong>PM</p>
+            </a>
+        </li>
+    </ul>
+
+        
+    <!--<p id="geolocation">Watching geolocation...</p>-->
+    <!--
+    <div data-role="content" style="padding: 15px">
+        <fieldset data-role="controlgroup">
+            <p id="geolocation">Watching geolocation...</p>
+        </fieldset>
+    </div>
+    -->
+
+</div>   <!-- page login -->
+
+
+<div data-role="page" id="page-message">
+    <script type="text/javascript"  src="javascripts/message.js"></script>
+        <ul data-role="listview" data-inset="true">
+            <li data-role="fieldcontain">
+                <label for="phone">Your Phone:</label>
+                <input cols="40" type="text" name="phone" id="phone" value=""  />
+                <label for="message">Your Message:</label>
+                <textarea cols="40" rows="8" name="message" id="message"></textarea>
+                <fieldset class="ui-grid-a">
+                        <div class="ui-block-a"><a data-role="button" data-rel="back" data-theme="d">Cancel</a></div>
+                        <div class="ui-block-b"><a data-role="button" data-rel="back" data-theme="a">Submit</a></div>
+                </fieldset>
+            </li>
+        </ul>
+</div>
+
+<div data-role="page" id="page-profile">
+    <div data-role="collapsible" data-collapsed="false" data-theme="b" data-content-theme="b">
+        <h3><div id="user_name"></div></h3>
+        <p>
+            <ul>
+                <li><img id="user_image" /></li>
+                <li><div id="user_location"></div></li>
+                <li><div id="user_email"></li>
+                <li><div id="user_sex"></li>
+                <li><div id="user_work"></li>
+            </ul>
+        </p>
+    <a href="index.html#page-home" data-theme="b" data-role="button">Go Back</a>    
+    </div>
+
+
+
+</body>
+</html>
