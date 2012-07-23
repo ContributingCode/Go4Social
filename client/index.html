@@ -51,12 +51,15 @@
 
     </script>
 
+    <script type="text/javascript">if (window.location.hash == '#_=_')window.location.hash = '#page-home';</script>
+
 </head>
 <body>
 
 <div data-role="page" id="page-login">
     <!--<script src="http://vcommute.cloudfoundry.com/socket.io/socket.io.js"></script>-->
     <script type="text/javascript"  src="javascripts/login.js"></script>
+
     <div style="position:fixed; top: 0; width:100%">
     <div data-role="header">
         <h1>Lift</h1>
@@ -65,7 +68,11 @@
     <div data-role="content" style="padding: 15px; text-align:center"> 
         <h1>Welcome To Lift!</h1>
         <p>This is an application for car pooling!</p>
-        <p><a data-role="button" id="auth-loginlink">Login with Facebook &raquo;</a></p>
+        <p>
+            <a data-role="button" id="auth-loginlink">Login with Facebook &raquo;</a>
+            <!--<fb:login-button id="auth-loginlink" onlogin="window.location.reload();" scope="email,user_website" v="2"></fb:login-button>-->
+        </p>
+
     </div>
     </div>
     

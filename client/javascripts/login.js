@@ -9,6 +9,11 @@
 
 $("#page-login").bind('pageinit', function() {
 
+
+    // if (window.location.href.indexOf('#_=_') > 0) {
+    //         window.location = window.location.href.replace(/#.*/, '');
+    // }
+
     $('page-message').dialog('close')
     url="http://givemearide.cloudfoundry.com";
 
@@ -92,11 +97,23 @@ $("#page-login").bind('pageinit', function() {
         });
 
 
-        $("#auth-loginlink").off('click').on('click',function () {
+        $("#auth-loginlink").off('click').on('click',
+            function logMeIn()
+            {
+              var paramsLocation=window.location.toString().indexOf('?');
+              var params="";
+              if (paramsLocation>=0)
+                params=window.location.toString().slice(paramsLocation);
+                //top.location = 'https://graph.facebook.com/oauth/authorize?client_id=155206827868292&scope=publish_stream&redirect_uri=http://localhost:3000/'+params;
+              top.location = 'https://graph.facebook.com/oauth/authorize?client_id=457940300897313&scope=publish_stream,email,user_location,user_work_history&redirect_uri=http://localhost:3000/index.html' + params + '#page-home';
+
+            }
+        /*function () {
             FB.login(function(response) {
                 // handle the response
             }, {scope: 'email,user_location,user_work_history'});
-        });
+        }*/
+        );
         document.getElementById('auth-logoutlink').addEventListener('click', function(){
           FB.logout();
         }); 
