@@ -1,0 +1,25 @@
+Project : 
+Hitchhiker
+
+Mission : 
+People wanna a ride sometimes. 
+This application helps people to find lifts and offer lifts to each other.
+You can find lifts and contact informaiton easily through this application. 
+It is a location based web application.
+We might make it into a mobile app later.
+
+Url :
+hitchhiker.cloudfoundry.com
+
+Usage :
+0.  Clone the directory to your local machine or whatever you want.
+1.  You need to install several packages to use the code.
+    1.1 NodeJS 0.6 version
+    1.2 Express 2.5.9
+    1.3 Socket.io
+    1.4 Mongosin
+    1.5 cloudfoundry
+2.  Lauch the website.
+
+
+
